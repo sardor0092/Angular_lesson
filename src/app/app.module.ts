@@ -8,6 +8,9 @@ import { MaterialModule } from './shared/material/material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RegisterComponent } from './login/register/register.component';
 import { HomeComponent } from './public/home/home.component';
+import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -15,8 +18,8 @@ import { HomeComponent } from './public/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    HomeComponent,
+
+    PagenotfoundComponent,
   
    
    
@@ -30,7 +33,10 @@ import { HomeComponent } from './public/home/home.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
+    
+    
 
 
 
@@ -47,6 +53,10 @@ import { HomeComponent } from './public/home/home.component';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } 
     
     },
+
+  
+    
+  
 
     
   ],

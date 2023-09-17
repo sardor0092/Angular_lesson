@@ -17,6 +17,7 @@ imports:[
 ],
 
 bootstrap:[HomeComponent]
+
 })
 
 
@@ -24,4 +25,4 @@ bootstrap:[HomeComponent]
 
 
 
-export class PunlicModule{}
+export class PublicModule{}
