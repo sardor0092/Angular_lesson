@@ -6,11 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './shared/material/material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { RegisterComponent } from './login/register/register.component';
-import { HomeComponent } from './public/home/home.component';
-import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
+import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UserComponent } from './admin/entity/user/user.component';
+import { AuthInterceptor } from './shared/auth-interceptor';
+
 
 
 
@@ -18,15 +17,10 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-
-    PagenotfoundComponent,
-  
-   
-   
-
-    
+    UserComponent
  
   ],
+  
   imports: [
     BrowserModule,
     FormsModule,
@@ -36,14 +30,7 @@ import { SharedModule } from './shared/shared.module';
     MaterialModule,
     HttpClientModule,
     
-    
 
-
-
-
-
-  
-   
 
   ],
   providers: [
@@ -53,6 +40,11 @@ import { SharedModule } from './shared/shared.module';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } 
     
     },
+
+
+   
+       { provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor , multi:true}
+    
 
   
     

@@ -7,14 +7,22 @@ import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { XonaComponent } from './entity/xona/xona.component';
+import { UqituvchilarComponent } from './entity/uqituvchilar/uqituvchilar.component';
+import { UquvchilarComponent } from './entity/uquvchilar/uquvchilar.component';
+import { DarsComponent } from './entity/dars/dars.component';
+import { UserComponent } from './entity/user/user.component';
 
 @NgModule({
 declarations:[
 
-    LayoutComponent,
+      LayoutComponent,
       HeaderComponent,
       SidenavComponent,
-      XonaComponent
+      XonaComponent,
+      UqituvchilarComponent,
+      UquvchilarComponent,
+      DarsComponent,
+      UserComponent
 
 
  
