@@ -17,7 +17,7 @@ import { AuthInterceptor } from './shared/auth-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    
  
   ],
   
@@ -30,8 +30,6 @@ import { AuthInterceptor } from './shared/auth-interceptor';
     MaterialModule,
     HttpClientModule,
     
-
-
   ],
   providers: [
 
