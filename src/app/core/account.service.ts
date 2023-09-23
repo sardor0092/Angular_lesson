@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable, ReplaySubject, of } from 'rxjs';
-import { shareReplay, tap, catchError, map } from 'rxjs/operators';
+import {  catchError } from 'rxjs/operators';
 import { User } from '../shared/model/user';
 import { environment } from 'src/environments/environment';
 
@@ -14,24 +13,39 @@ export class AccountService {
   private authenticationState = new ReplaySubject<User | null>(1);
   private userCache$?: Observable<User | null>;
   private baseApi = environment.baseUrl + "/api/account";
+  uploadProfileImage: any;
   constructor(
     private http: HttpClient,
     private router: Router,
   ) { }
 
   save(user: User): Observable<{}> {
-    return this.http.post(this.baseApi, user);
+    return this.http.put(this.baseApi, user);
+  }
+  savePassword(user: any): Observable<{}> {
+    return this.http.put(this.baseApi + "/password", user);
   }
 
+ 
+  public create(userlar: User): Observable<User> {
+    return this.http.post<User>(this.baseApi, userlar);
+  }
+
+  public update(userlar: User): Observable<User> {
+    return this.http.put<User>(this.baseApi, userlar);
+  }
   authenticate(identity: User | null): void {
     
     this.userIdentity = identity;
     this.authenticationState.next(this.userIdentity);
   }
+
   hasAnyAuthority(lavozimlar: string[] | string): boolean {
     if (!this.userIdentity) {
       return false;
     }
+    if(!this.userIdentity.lavozimlar) return false;
+    
     if (!Array.isArray(lavozimlar)) {
       lavozimlar = [lavozimlar];
     }
@@ -57,7 +71,6 @@ export class AccountService {
 
         }
       );
-
     }
     return this.userCache$;
   }
