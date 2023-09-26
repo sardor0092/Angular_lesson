@@ -8,6 +8,7 @@ import { Injectable } from "@angular/core";
 
 
 export class StateStorageService {
+  [x: string]: any;
 
 
 
@@ -16,9 +17,9 @@ export class StateStorageService {
 
     constructor (){}
  
-    storeUlr(url:string):void {
-      sessionStorage.setItem(this.previnousUrlKey , url);
-    }
+    // storeUlr(url:string):void {
+    //   sessionStorage.setItem(this.previnousUrlKey , url);
+    // }
 
 
     getUrl():string | null{

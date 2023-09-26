@@ -33,7 +33,7 @@ export class UserRouteAccessGuard implements CanActivate {
           verticalPosition: 'bottom',
 
         });
-        this.stateStorageService.storeUrl(state.url);
+        this.stateStorageService['storeUrl'](state.url);
         this.router.navigate(['/login']);
         return false;
       }

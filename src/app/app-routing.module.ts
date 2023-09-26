@@ -1,34 +1,36 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { UserRouteAccessGuard } from './core/user-route-access.guard';
 import { PagenotfoundComponent } from './shared/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
 
- 
   {
-    path:'',
-    loadChildren:()=>
-    import('./public/public.module').then((m)=>m.PublicModule),
+    path: '',
+    loadChildren: () =>
+      import('./public/public.module').then((m) => m.PublicModule),
   },
   {
-    path:'admin',
-    loadChildren:()=>
-    import('./admin/admin.module').then((m)=>m.AdminModule)
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [UserRouteAccessGuard]
   },
   {
-path:'login',
-loadChildren:() =>
-import('./login/login.module').then((m)=>m.LoginModule)
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
   },
-
-
-  {path:'**',component:PagenotfoundComponent}
-
-
-];
+  { path: '**', component: PagenotfoundComponent }
+]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [ RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
+
+
+ 
+
 export class AppRoutingModule { }

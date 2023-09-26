@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtUtil } from '../core/jwt.util';
+import { StateStorageService } from './statestorege.service';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +14,19 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
 loginForm:any;
+surovBajarilmoqda =  false;
+
+
+constructor(private router:Router ,
+  private formBuilder:FormBuilder,
+  private loginService:LoginService,
+  private _snackbar:MatSnackBar,
+  private jwtUtil:JwtUtil,
+  private stataStorageService:StateStorageService){
+
+  }
+
+
 
 
 
@@ -15,7 +34,76 @@ loginForm:any;
 
 
   ngOnInit(): void {
-    
+
+    this.loginForm =  this.formBuilder.group({
+      login:[null ,[Validators.required , Validators.minLength(6)]],
+      parol:[null ,[Validators.required , Validators.minLength(6)]],
+      rememberMe: [null]
+
+      
+    });
+
   }
+
+  onLogin(){
+
+    this.jwtUtil.clear();
+
+
+    const loginParol = this.loginForm.getRawValue();
+    this.surovBajarilmoqda =  true;
+    console.log(loginParol);
+
+
+    this.loginService.login(loginParol).subscribe(
+      ()=> {
+        this.surovBajarilmoqda =  false;
+
+        let roles = this.jwtUtil.getRoles();
+
+         const prevUrl =  this.stataStorageService.getUrl();
+
+         if(prevUrl){
+
+          // Oxirgi kirgan manzil bo'yicha yo'naltirish
+
+          this.router.navigate(["/admin"]);
+         }
+
+         else {
+          this.router.navigate(["/admin"]);
+         }
+
+
+      },
+      (error) =>{
+        let message = "Login yoki pariol xato!";
+        if(error.error.message){
+          if(error.error.message != "INVALID_CREDENTIALS") {
+            message =  error.error.message;
+          }
+        }
+
+        this._snackbar.open(message , 'X',{
+          duration:4000,
+          verticalPosition:'bottom',
+        });
+
+        this.surovBajarilmoqda =  false;
+      }
+      
+
+
+    )
+    
+
+  }
+
+
+
+
+
+
+
 
 }

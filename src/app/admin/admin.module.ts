@@ -22,7 +22,7 @@ declarations:[
       UqituvchilarComponent,
       UquvchilarComponent,
       DarsComponent,
-      UserComponent
+      
 
 
  

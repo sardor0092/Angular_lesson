@@ -6,9 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './shared/material/material.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './admin/entity/user/user.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
+import { CoreModule } from './core/core-module';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -17,18 +19,21 @@ import { AuthInterceptor } from './shared/auth-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    
+     UserComponent
  
   ],
   
   imports: [
     BrowserModule,
-    FormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    MaterialModule,
-    HttpClientModule,
+    MaterialModule,    
+    CoreModule,
+    SharedModule,
+   
     
   ],
   providers: [
