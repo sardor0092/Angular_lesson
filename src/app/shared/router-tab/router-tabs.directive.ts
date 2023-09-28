@@ -40,7 +40,7 @@ export class RouterTabs implements AfterContentInit, OnDestroy {
         if (!tab) {
           return;
         }
-        this.router.navigateByUrl(tab.link.urlTree);
+        this.router.navigateByUrl("[tab.link.urlTree]");
         return true;
       })
     );
@@ -48,7 +48,7 @@ export class RouterTabs implements AfterContentInit, OnDestroy {
 
   private setIndex() {
     this.routerTabs?.find((tab, i) => {
-       if (!this.router.isActive(tab.link.urlTree, false)) return false;
+      if (!this.router.isActive("[tab.link.urlTree]", false)) return false;
       tab.tab.isActive = true;
       this.host.selectedIndex = i;
       return true;

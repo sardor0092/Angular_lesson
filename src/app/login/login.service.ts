@@ -27,17 +27,11 @@ export class LoginService {
       })
     );
   }
-
-
   register(user: User): Observable<any> {
     return this.http.post<any>(this.api + "/register", user);
   }
-
-
   logout(): void {
     this.jwtUtil.clear();
     this.accountService.authenticate(null);
   }
-
-  
 }
